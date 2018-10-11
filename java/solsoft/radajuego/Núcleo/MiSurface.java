@@ -9,6 +9,10 @@ import android.view.SurfaceHolder;
 import android.view.View;
 
 import solsoft.radajuego.Interfaz.Pantalla;
+import solsoft.radajuego.Interfaz.PantallaInicio;
+import solsoft.radajuego.Modelo.IdPantalla;
+
+import static solsoft.radajuego.Modelo.IdPantalla.*;
 
 public class MiSurface extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
 
@@ -42,7 +46,7 @@ public class MiSurface extends SurfaceView implements SurfaceHolder.Callback, Vi
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         mAnchoPantalla = width;
         mAltoPantalla = height;
-        mPantallaActual = new Pantalla(mContext, mAnchoPantalla, mAltoPantalla);
+        mPantallaActual = new PantallaInicio(mContext, mAnchoPantalla, mAltoPantalla);
     }
 
     @Override
@@ -57,13 +61,26 @@ public class MiSurface extends SurfaceView implements SurfaceHolder.Callback, Vi
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-        int numEscena;
+        IdPantalla idPantalla;
         synchronized (mSurfaceHolder) {
-            numEscena = mPantallaActual.onTouchEvent(event);
+            idPantalla = mPantallaActual.onTouchEvent(event);
         }
 
-        return false;
+        if (idPantalla != mPantallaActual.idPantalla) {
+            switch (idPantalla) {
+                case INICIO:
+                    break;
+            }
+        }
+        return true;
+    }
+
+    public void pausa(){
+
+    }
+
+    public void continuar(){
+
     }
 
     class Hilo extends Thread {

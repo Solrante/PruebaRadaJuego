@@ -2,60 +2,53 @@ package solsoft.radajuego.Interfaz;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.text.TextPaint;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import solsoft.radajuego.R;
+import solsoft.radajuego.Modelo.IdPantalla;
 
 public class Pantalla {
 
-    private Context mContext;
-    private int mAnchoPantalla;
-    private int mAltoPantalla;
+    protected Context mContext;
+    protected int mAnchoPantalla;
+    protected int mAltoPantalla;
+    public IdPantalla idPantalla;
 
-    private Map<String, Paint> mPinceles;
-    private Map<String, TextPaint> mPincelesTexto;
-    private Map<String, PointF> mPosiciones;
-    private Map<String, RectF> mRectangulos;
-    private Map<String, String> mTextos;
+    protected Map<String, Paint> mPinceles;
+    protected Map<String, TextPaint> mPincelesTexto;
+    protected Map<String, PointF> mPosiciones;
+    protected Map<String, RectF> mRectangulos;
+    protected Map<String, String> mTextos;
 
     public Pantalla(Context context, int anchoPantalla, int altoPantalla) {
         mContext = context;
         mAnchoPantalla = anchoPantalla;
         mAltoPantalla = altoPantalla;
-
-        cargarPinceles();
-        cargarPincelesTexto();
-        cargarPosiciones();
-        cargarTextos();
-        cargarRectangulos();
     }
 
-    private void cargarRectangulos() {
+    protected void cargarRectangulos() {
         mRectangulos = new HashMap<>();
     }
 
-    private void cargarTextos() {
+    protected void cargarTextos() {
         mTextos = new HashMap<>();
     }
 
-    private void cargarPosiciones() {
+    protected void cargarPosiciones() {
         mPosiciones = new HashMap<>();
     }
 
-    private void cargarPincelesTexto() {
+    protected void cargarPincelesTexto() {
         mPincelesTexto = new HashMap<>();
     }
 
-    private void cargarPinceles() {
+    protected void cargarPinceles() {
         mPinceles = new HashMap<>();
     }
 
@@ -65,8 +58,7 @@ public class Pantalla {
     public void dibujar(Canvas canvas) {
     }
 
-
-    public int onTouchEvent(MotionEvent event) {
-        return 0;
+    public IdPantalla onTouchEvent(MotionEvent event) {
+        return idPantalla;
     }
 }

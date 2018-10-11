@@ -9,12 +9,14 @@ import solsoft.radajuego.Núcleo.MiSurface;
 
 public class MainActivity extends AppCompatActivity {
 
+    MiSurface miSurface;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        MiSurface miSurface = new MiSurface(this);
+        miSurface = new MiSurface(this);
         miSurface.setKeepScreenOn(true);
         setContentView(miSurface);
     }
@@ -22,15 +24,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+        miSurface.pausa();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        miSurface.continuar();
     }
 }
