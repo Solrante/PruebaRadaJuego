@@ -18,4 +18,19 @@ public class MainActivity extends AppCompatActivity {
         miSurface.setKeepScreenOn(true);
         setContentView(miSurface);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

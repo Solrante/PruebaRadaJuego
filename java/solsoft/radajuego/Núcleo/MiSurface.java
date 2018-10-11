@@ -3,12 +3,14 @@ package solsoft.radajuego.Núcleo;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+import android.view.View;
 
 import solsoft.radajuego.Interfaz.Pantalla;
 
-public class MiSurface extends SurfaceView implements SurfaceHolder.Callback {
+public class MiSurface extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
 
 
     private SurfaceHolder mSurfaceHolder;
@@ -27,6 +29,7 @@ public class MiSurface extends SurfaceView implements SurfaceHolder.Callback {
         this.mContext = context;
         mHilo = new Hilo();
         setFocusable(true);
+        setOnTouchListener(this);
     }
 
     @Override
@@ -52,6 +55,16 @@ public class MiSurface extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        int numEscena;
+        synchronized (mSurfaceHolder) {
+            numEscena = mPantallaActual.onTouchEvent(event);
+        }
+
+        return false;
+    }
 
     class Hilo extends Thread {
         long tiempoDormido = 0;
@@ -62,7 +75,6 @@ public class MiSurface extends SurfaceView implements SurfaceHolder.Callback {
         public void run() {
             final int FRAGMENTO_TEMPORAL = TPS / FPS;
             long tiempoReferencia = System.nanoTime();
-
             while (mHiloFuncionando) {
                 Canvas canvas = null;
                 try {
